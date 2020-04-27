@@ -1,6 +1,6 @@
 {
-	"name": "vscode-purty",
-	"displayName": "vscode-purty",
+	"name": "coc-purty",
+	"displayName": "coc-purty",
 	"publisher": "mvakula",
 	"author": {
 		"name": "Mika Vakula"
@@ -8,7 +8,7 @@
 	"description": "PureScript formatter",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/mvakula/vscode-purty"
+		"url": "https://github.com/mvakula/coc-purty"
 	},
 	"version": "0.4.0",
 	"engines": {
