@@ -1,4 +1,4 @@
-# vscode-purty
+# coc-purty
 
 Code formatting with [purty](https://gitlab.com/joneshf/purty).
 
