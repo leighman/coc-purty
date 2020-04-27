@@ -1,4 +1,5 @@
-const vscode = require('vscode')
+const coc = require('coc.nvim')
+const { TextEdit, Range } = require('vscode-languageserver-protocol')
 const { exec } = require('child_process')
 const path = require('path')
 const fs = require('fs')
@@ -7,7 +8,7 @@ const pkgUp = require('pkg-up')
 function activate(context) {
   console.log('Congratulations, your extension "vscode-purty" is now active!')
   context.subscriptions.push(
-    vscode.languages.registerDocumentFormattingEditProvider(
+    coc.languages.registerDocumentFormatProvider(
       { scheme: 'file', language: 'purescript' },
       { provideDocumentFormattingEdits: doc => format(doc) }
     )
@@ -19,27 +20,26 @@ function format(document) {
   return purty(document)
     .then(({ stdout }) => {
       const lastLineId = document.lineCount - 1
-      const wholeDocument = new vscode.Range(
-        0,
-        0,
-        lastLineId,
-        document.lineAt(lastLineId).text.length
+      const doc = coc.workspace.getDocument(document.uri)
+      const wholeDocument = Range.create(
+        {character: 0, line: 0},
+        {character: doc.getline(lastLineId).length, line: lastLineId}
       )
-      return [vscode.TextEdit.replace(wholeDocument, stdout)]
+      return [TextEdit.replace(wholeDocument, stdout)]
     })
     .catch(err => {
       console.log('err', err)
-      vscode.window.showErrorMessage(`Error: ${err}`);
-      vscode.window.showInformationMessage('Do you have Purty installed? "npm install purty"');
+      coc.workspace.showMessage(`Error: ${err}`, 'error');
+      coc.workspace.showMessage('Do you have Purty installed? "npm install purty"', 'info');
     })
 }
 
 function purty(document) {
-  const configs = vscode.workspace.getConfiguration('purty');
+  const configs = coc.workspace.getConfiguration('purty');
   const purtyCmd = getPurtyCmd(configs.pathToPurty, document.fileName)
   const cmd = `${purtyCmd} -`;
   const text = document.getText();
-  const cwdCurrent = vscode.workspace.rootPath;
+  const cwdCurrent = coc.workspace.rootPath;
   return new Promise((resolve, reject) => {
     const childProcess = exec(cmd, { cwd: cwdCurrent }, (err, stdout, stderr) => {
       if (err) {
