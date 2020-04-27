@@ -46,10 +46,6 @@
 			}
 		}
 	},
-	"scripts": {
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "node ./node_modules/vscode/bin/test"
-	},
 	"devDependencies": {
 		"diff": ">=3.5.0",
 		"eslint": "^6.4.0",
