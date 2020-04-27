@@ -12,7 +12,7 @@
 	},
 	"version": "0.4.0",
 	"engines": {
-		"vscode": "^1.30.0"
+		"coc": ">= 0.0.30"
 	},
 	"categories": [
 		"Formatters"
