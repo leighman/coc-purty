@@ -1,10 +1,13 @@
 {
 	"name": "coc-purty",
 	"displayName": "coc-purty",
-	"publisher": "mvakula",
+	"publisher": "leighman",
 	"author": {
 		"name": "Mika Vakula"
 	},
+	"contributors": [
+		"Jack Leigh <jack.leigh@gmail.com>"
+	],
 	"description": "PureScript formatter",
 	"repository": {
 		"type": "git",
