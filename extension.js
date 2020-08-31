@@ -6,7 +6,7 @@ const fs = require('fs')
 const pkgUp = require('pkg-up')
 
 function activate(context) {
-  console.log('Congratulations, your extension "vscode-purty" is now active!')
+  console.log('Congratulations, your extension "coc-purty" is now active!')
   context.subscriptions.push(
     coc.languages.registerDocumentFormatProvider(
       { scheme: 'file', language: 'purescript' },
